@@ -13,7 +13,7 @@ A small-scale home coffee roaster, built incrementally from a hand-cranked sifte
 
 ## What This Is
 
-Roastronaut is a DIY coffee roaster project staged in four phases (a smoke test up front, then a crawl-walk-run progression). The inspiration and base is Larry Cotton's flour-sifter design from a [2019 Make: Magazine article](https://makezine.com/projects/simple-sifter-coffee-roaster/). From there I'll layering on sensor telemetry into Home Assistant, closed-loop heat control with audio first-crack detection, and eventually a vision + LLM layer for real-time roast grading and post-roast critique.
+Roastronaut is a DIY coffee roaster project staged in four phases (a smoke test up front, then a crawl-walk-run progression). The inspiration and base is Larry Cotton's flour-sifter design from a [2019 Make: Magazine article](https://makezine.com/projects/simple-sifter-coffee-roaster/). From there I'll layer on sensor telemetry into Home Assistant, closed-loop heat control with audio first-crack detection, and eventually a vision + LLM layer for real-time roast grading and post-roast critique.
 
 The docs are the artifact; anyone with a Saturday and a heat gun can recreate Phase 0 from scratch.
 
