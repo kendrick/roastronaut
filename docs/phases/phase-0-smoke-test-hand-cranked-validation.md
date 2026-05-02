@@ -25,9 +25,9 @@ It also answers a question that no amount of planning can answer: **do you actua
 By the end of Phase 0:
 
 - You have roasted at least one batch of coffee to drinkable result, hand-cranking the sifter over a heat gun.
-- One K-type thermocouple is reading bean-mass temperature, exposed to Home Assistant via ESPHome.
+- One K-type thermocouple is reading [bean-mass temperature](../glossary.md#bt-bean-mass-temperature), exposed to Home Assistant via ESPHome.
 - A Lovelace card shows live BT during the roast.
-- A smart plug between the wall and the heat gun is HA-controlled, with an automation that kills it if BT exceeds 480°F.
+- A [smart plug](../safety.md#smart-plug-hard-kill) between the wall and the heat gun is HA-controlled, with an automation that kills it if BT exceeds 480°F.
 - **An LLM critiques each roast post-mortem.** At end of roast, an HA automation grabs the BT curve, sends it to Claude (or whichever provider) via API, and displays a written critique back in HA.
 
 That last bullet is the centerpiece. The whole point of Phase 0 is to flush integration risk on the AI touchpoint before it's buried under fabrication work.
@@ -101,9 +101,11 @@ Crossing this bridge later per your previous direction, but the shape:
 
 That's the entire Phase 0 firmware. Maybe 30 lines of YAML.
 
+> **Claude Code:** ESPHome YAML is the canonical Claude Code use case for this project. See [tooling-claude-code.md](../tooling-claude-code.md#esphome-yaml).
+
 ### Step 5: Smart Plug + Safety Automation
 
-1. Plug the GFCI cord into the wall.
+1. Plug the [GFCI cord](../safety.md#gfci-extension-cord) into the wall.
 2. Plug the smart plug into the GFCI cord.
 3. Plug the heat gun into the smart plug.
 4. Pair the smart plug with HA via whichever integration matches the model you bought (Kasa, Tasmota, ESPHome, etc.).
@@ -134,6 +136,8 @@ Crossing the wiring bridge later, but the shape:
 
 The first time this works end-to-end, take a screenshot. That moment is what Phase 0 exists for.
 
+> **Claude Code:** The post-mortem critique prompt is canonical and version-controlled in [tooling-claude-code.md](../tooling-claude-code.md#phase-0-post-mortem-critique). Edit there, then sync to HA.
+
 ## First-roast Checklist
 
 - [ ] Outside or garage door fully open.
@@ -153,7 +157,7 @@ The first time this works end-to-end, take a screenshot. That moment is what Pha
 2. Turn the heat gun on. Low setting if it's above 60°F outside, high if cooler.
 3. Crank the sifter handle at roughly **one revolution every 2–3 seconds**. Steady rhythm, both directions are fine, just keep the beans moving.
 4. Watch BT climb on your phone. You should see a steady rise from ambient toward 200°F over the first 4–5 minutes (the drying phase), then continued climb.
-5. At ~395–410°F BT you should hear the first crack: a popping sound like distant popcorn. Note the time mentally.
+5. At ~395–410°F BT you should hear the [first crack](../glossary.md#first-crack): a popping sound like distant popcorn. Note the time mentally.
 6. Keep cranking. Beans go from tan to brown. Decide your stop point: light roast just past first crack, medium at ~430°F, dark approaching second crack at ~440–450°F.
 7. When you're done, **turn the heat gun off first**, then dump the beans into the metal bowl and stir vigorously to cool them. Or pour onto the cooling rack and shake.
 8. Tap the **"Roast Complete"** button on your HA dashboard.

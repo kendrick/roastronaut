@@ -17,8 +17,8 @@ budget: ~$50 in new parts
 By the end of this phase, the roaster:
 
 - **Drives the heat gun continuously** via an AC dimmer module instead of just on/off. Anywhere from ~0% to 100% power, set by the ESP32.
-- **Follows a stored roast curve** via PID control of bean-mass temperature. You pick a profile from a Home Assistant dropdown ("Ethiopia natural — light", "Brazil washed — medium", etc.) and the controller drives BT to match.
-- **Detects first crack automatically** via a microphone and an FFT-based threshold detector running on the ESP32. Fires an HA event so you can see the marker on the live curve.
+- **Follows a stored roast curve** via PID control of [bean-mass temperature](../glossary.md#bt-bean-mass-temperature). You pick a profile from a Home Assistant dropdown ("Ethiopia natural — light", "Brazil washed — medium", etc.) and the controller drives BT to match.
+- **Detects [first crack](../glossary.md#first-crack) automatically** via a microphone and an FFT-based threshold detector running on the ESP32. Fires an HA event so you can see the marker on the live curve.
 - **Dumps the beans automatically** at roast end via a servo that rotates the sifter to the dump position.
 - **Modulates the cooling fan** for a controlled cooldown profile rather than full-blast forever.
 
@@ -32,7 +32,7 @@ By the end of this phase, the roaster:
 
 Phase 1 was instrumentation; Phase 2 is actuation. The same hardware stack, with four new actuators and one new sensor:
 
-1. **AC dimmer** in series with the heat gun's hot leg. Replaces the on/off smart plug for normal control. (Smart plug stays in the chain as a hard kill.)
+1. **AC dimmer** in series with the heat gun's hot leg. Replaces the on/off [smart plug](../safety.md#smart-plug-hard-kill) for normal control. (Smart plug stays in the chain as a hard kill.)
 2. **I2S microphone** mounted on the project enclosure, listening for the 200–400 Hz pop signature of first crack.
 3. **Servo + linkage** that pushes the sifter from roast to dump position when commanded.
 4. **MOSFET-controlled cooling fan** replaces the box fan with a PWM-controlled DC fan, or adds a relay+PWM driver if you want to keep the box fan.
@@ -58,7 +58,7 @@ If you'd rather keep the 20" box fan for cooling and skip the DC fan entirely, o
 
 ### Step 1: Install the AC Dimmer
 
-The dimmer goes between your GFCI extension cord and the heat gun. The smart plug from Phase 1 stays in front of the dimmer as a hard kill. Both must be on for the gun to receive any power.
+The dimmer goes between your [GFCI extension cord](../safety.md#gfci-extension-cord) and the heat gun. The smart plug from Phase 1 stays in front of the dimmer as a hard kill. Both must be on for the gun to receive any power.
 
 1. Cut the heat gun's power cord (or use an inline outlet box). Wire the hot leg through the dimmer's load terminals; neutral and ground pass straight through.
 2. Mount the dimmer module **outside** the project enclosure or in its own small box. It dissipates real heat at full load and you don't want it warming your thermocouple amps.
@@ -74,6 +74,8 @@ The dimmer goes between your GFCI extension cord and the heat gun. The smart plu
 3. Cable shouldn't be more than ~12"; I2S doesn't love long runs.
 
 The ESP32 reads the audio stream, runs a windowed FFT, and watches the 200–400 Hz band. First crack shows up as a sharp transient peak well above the background fan/motor noise floor. You'll calibrate the threshold during your first few Phase 2 roasts.
+
+> **Claude Code:** The audio FFT lives in a custom ESPHome external component (no stock alternative). See [tooling-claude-code.md](../tooling-claude-code.md#custom-esphome-external-components) for scope guidance.
 
 ### Step 3: Add the Dump Servo
 
@@ -106,7 +108,7 @@ This is the part most DIY roaster builds skip. **Do not skip this.**
 **Dimmer calibration:**
 
 1. With the bean chamber empty and sifter mounted normally, run the heat gun at fixed dimmer levels: 30%, 40%, 50%, 60%, 70%, 80%, 100%.
-2. Hold each level for 90 seconds. Record stabilized ET temperature at each point.
+2. Hold each level for 90 seconds. Record stabilized [ET](../glossary.md#et-environmental-temperature) temperature at each point.
 3. You should see a roughly linear-ish ET vs duty-cycle curve. Use this as the feed-forward baseline for your PID.
 
 **Microphone calibration:**

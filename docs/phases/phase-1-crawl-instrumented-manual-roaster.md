@@ -18,10 +18,10 @@ based_on: 'https://makezine.com/projects/simple-sifter-coffee-roaster/ (Larry Co
 By the end of this phase, we'll have a working DIY heat-gun coffee roaster that:
 
 - Mechanically follows Larry Cotton's flour-sifter roaster design, with a handful of safety and quality-of-life improvements.
-- Logs **bean-mass temperature (BT)**, **environmental temperature (ET)**, and **paddle motor speed** to Home Assistant in real time.
-- Surfaces a live **rate-of-rise (RoR)** curve while you roast.
-- Has a software-controlled kill switch on the heat gun via a smart plug.
-- Has a physical interlock (your hinge-lever microswitch) that disables the paddle motor when the sifter handle is lifted.
+- Logs **[bean-mass temperature (BT)](../glossary.md#bt-bean-mass-temperature)**, **[environmental temperature (ET)](../glossary.md#et-environmental-temperature)**, and **paddle motor speed** to Home Assistant in real time.
+- Surfaces a live **[rate-of-rise (RoR)](../glossary.md#ror-rate-of-rise)** curve while you roast.
+- Has a software-controlled kill switch on the heat gun via a [smart plug](../safety.md#smart-plug-hard-kill).
+- Has a [physical interlock](../safety.md#microswitch-interlock) (your hinge-lever microswitch) that disables the paddle motor when the sifter handle is lifted.
 
 ## Non-goals
 
@@ -37,7 +37,7 @@ Cotton's build is sound, but it was published in 2019 with no electronics layer 
 2. **Cooling station from day one**. A perforated half-sheet pan over a box fan, instead of dumping into a baking pan. Drops the beans below 200°F in under a minute. Way simpler than the article's fan-bracket version, and you keep the small base.
 3. **Electronics enclosure** mounted to the side of the base keeps the ESP32, thermocouple amps, and motor driver out of the heat path and accessible for servicing.
 4. **Through-panel thermocouple connectors** so you can disconnect the sifter from the base without unsoldering anything.
-5. **GFCI protection** on the heat-gun circuit. The article mentions a 15A circuit; we go further.
+5. **[GFCI protection](../safety.md#gfci-extension-cord)** on the heat-gun circuit. The article mentions a 15A circuit; we go further.
 6. **Optional 3D-printed parts** to replace the hardest hand-fabbed pieces (pivot bracket, HG locator). Skip if you don't have a printer; the original aluminum/plywood versions work fine.
 7. **Slightly larger paddle-to-screen clearance** (1/8" instead of 1/16"). Cotton notes that one paddle dragging is OK; we'd rather have neither dragging because we want this thing to last more than a season.
 
@@ -255,6 +255,8 @@ You'll cross this bridge later. Sketching the shape so you know what's coming:
 - **Lovelace dashboard:** live BT/ET line chart, RoR gauge, motor speed slider, handle interlock indicator, heat gun kill button. ApexCharts card handles the time-series view well.
 - **InfluxDB or HA's built-in long-term statistics** for keeping every roast curve.
 
+> **Claude Code:** The ESPHome YAML for the Phase 1 sensors and motor driver, the HA template sensor for RoR, and the Lovelace card config are all canonical Claude Code use cases. See [tooling-claude-code.md](../tooling-claude-code.md#where-claude-code-earns-its-keep).
+
 ## First-roast Checklist
 
 Before you load any beans:
@@ -276,7 +278,7 @@ Then load 1 cup of green beans, motor on, heat gun on low, and watch the BT curv
 You can move on to Phase 2 once you've done all of the following:
 
 - Successfully roasted at least **3 batches** of 12oz green beans to drinkable result.
-- Logged BT and ET curves for those roasts that look qualitatively like real roast curves (steady climb, characteristic flattening at first crack, no wild noise).
+- Logged BT and ET curves for those roasts that look qualitatively like real roast curves (steady climb, characteristic flattening at [first crack](../glossary.md#first-crack), no wild noise).
 - Verified the smart-plug kill works (test with a fake overtemp condition in HA).
 - Verified the handle interlock kills the motor.
 - Cooling station drops beans below 200°F in under 2 minutes.

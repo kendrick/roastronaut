@@ -18,14 +18,14 @@ budget: ~$30 in new parts (assumes homelab can host inference; otherwise add API
 By the end of this phase, the roaster:
 
 - **Sees the beans** via an ESP32-CAM mounted to peek through the sifter screen, streaming frames to HA throughout the roast.
-- **Grades the roast in real time** using a multimodal model (local via Ollama, or hosted via API), outputs an estimated SCAA roast level and a "drop now / wait" recommendation overlaid on the dashboard.
-- **Critiques the roast post-mortem**. At the end of each roast, an HA script bundles BT/RoR/audio/vision data and asks an LLM to evaluate the roast and suggest profile adjustments.
+- **Grades the roast in real time** using a multimodal model (local via Ollama, or hosted via API), outputs an estimated [SCAA roast level](../glossary.md#scaa-roast-levels) and a "drop now / wait" recommendation overlaid on the dashboard.
+- **Critiques the roast post-mortem**. At the end of each roast, an HA script bundles [BT](../glossary.md#bt-bean-mass-temperature)/[RoR](../glossary.md#ror-rate-of-rise)/audio/vision data and asks an LLM to evaluate the roast and suggest profile adjustments.
 - **Suggests starting profiles** for new beans based on origin info plus your own roaster's history with similar beans.
 
 ## Non-goals
 
 - No fully autonomous "load beans, walk away" operation. Heat gun trigger is still pulled by you. Beans are still loaded by hand. We're augmenting decisions, not removing humans.
-- No replacement of Phase 2's first-crack detector. Vision is additive; audio is faster and cheaper.
+- No replacement of Phase 2's [first-crack](../glossary.md#first-crack) detector. Vision is additive; audio is faster and cheaper.
 
 ## What Changes Vs Phase 2
 
@@ -120,7 +120,7 @@ The flow:
 
 At end of each roast (when the dump command fires), an HA script:
 
-1. Bundles the full telemetry: BT curve, ET curve, RoR over time, mic-detected first-crack timestamp, dimmer duty cycle history, motor speed, camera-detected level history, profile that was selected.
+1. Bundles the full telemetry: BT curve, [ET](../glossary.md#et-environmental-temperature) curve, RoR over time, mic-detected first-crack timestamp, dimmer duty cycle history, motor speed, camera-detected level history, profile that was selected.
 2. Sends it as JSON to an LLM with a prompt asking for a roast review: was development time appropriate, did the roast hit profile, what would you adjust next time.
 3. Stores the response as a markdown note attached to the roast log entry.
 
@@ -139,6 +139,8 @@ A HA script sends this to the LLM along with your roaster's roast history filter
 You can either accept the proposed profile as-is, edit it before saving, or ignore it. Like the grading recommendation, the call stays with you.
 
 The bigger your log gets, the less generic the suggestions become.
+
+> **Claude Code:** All three Phase 3 prompts (vision grading, post-mortem, recipe intelligence) are version-controlled in [tooling-claude-code.md](../tooling-claude-code.md#llm-prompt-patterns). Edit there, then sync to HA.
 
 ## Privacy and Self-Hosting Notes
 
@@ -174,7 +176,7 @@ There isn't really a "done" for Phase 3. Once the AI layer is in, you'll keep re
 | Inference location | Local (Ollama) preferred, hosted as fallback         | Aligns with privacy-first principle; cost is zero ongoing                                                                                                  |
 | Vision model       | Llama 3.2 Vision baseline, Qwen2-VL if GPU available | Both handle the task; Qwen2-VL is sharper on color                                                                                                         |
 | Grading interval   | Every 10 seconds                                     | Roasts move fast at the end; 10s gives 6 evaluations per minute, enough to catch the drop point                                                            |
-| Decision authority | Human keeps drop and dump                            | This is the line. The AI advises, you decide. Family safety and "the AI made a mistake" recovery both matter.                                              |
+| Decision authority | [Human keeps drop and dump](../safety.md#human-keeps-drop-and-dump-authority) | This is the line. The AI advises, you decide. Family safety and "the AI made a mistake" recovery both matter. |
 
 ## Future Ideas (Run+1, When bored)
 
