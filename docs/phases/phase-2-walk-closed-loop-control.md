@@ -28,7 +28,7 @@ By the end of this phase, the roaster:
 - No LLM-driven critique or post-mortem; Phase 3.
 - No auto-loading of green beans; that's Cotton's "going further" rabbit hole and we're not going there.
 
-## What Changes Vs Phase 1
+## What Changes Vs. Phase 1
 
 Phase 1 was instrumentation; Phase 2 is actuation. The same hardware stack, with four new actuators and one new sensor:
 

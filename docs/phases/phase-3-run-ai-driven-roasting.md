@@ -6,7 +6,6 @@ created: 2026-05-01
 related:
   - homeops
   - home-assistant
-  - homelab
 prerequisite: Phase 2 (Walk) complete and stable; at least 5 logged roasts in storage
 budget: ~$30 in new parts (assumes homelab can host inference; otherwise add API costs)
 ---
@@ -27,7 +26,7 @@ By the end of this phase, the roaster:
 - No fully autonomous "load beans, walk away" operation. Heat gun trigger is still pulled by you. Beans are still loaded by hand. We're augmenting decisions, not removing humans.
 - No replacement of Phase 2's [first-crack](../glossary.md#first-crack) detector. Vision is additive; audio is faster and cheaper.
 
-## What Changes Vs Phase 2
+## What Changes Vs. Phase 2
 
 Phase 2 added control. Phase 3 adds judgment. The hardware delta is small. Almost everything new lives in software:
 
