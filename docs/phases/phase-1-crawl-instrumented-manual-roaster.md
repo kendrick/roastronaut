@@ -1,17 +1,16 @@
 ---
 title: Roastronaut Phase 1 (Crawl) - Instrumented Manual Roaster
-status: active
+status: planned
 phase: crawl
 created: 2026-05-01
 related:
   - homeops
   - home-assistant
-  - homelab
 budget: ~$130 in new parts
 based_on: 'https://makezine.com/projects/simple-sifter-coffee-roaster/ (Larry Cotton, Make: Magazine, 2019)'
 ---
 
-# Phase 1 (Crawl): Instrumented Manual Roaster
+# Roastronaut Phase 1 (Crawl): Instrumented Manual Roaster
 
 ## Goals
 
@@ -273,7 +272,7 @@ Before you load any beans:
 
 Then load 1 cup of green beans, motor on, heat gun on low, and watch the BT curve climb. Pull when you hear/see the roast you want, same as the original article.
 
-## Phase Exit Criteria… When You're Ready for Walk
+## Phase Exit Criteria: When You're Ready for Walk
 
 You can move on to Phase 2 once you've done all of the following:
 
