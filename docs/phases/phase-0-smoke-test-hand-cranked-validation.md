@@ -1,6 +1,6 @@
 ---
 title: Roastronaut Phase 0 (Smoke Test) - Hand-Cranked Validation
-status: planned
+status: active
 phase: zero
 created: 2026-05-01
 related:
