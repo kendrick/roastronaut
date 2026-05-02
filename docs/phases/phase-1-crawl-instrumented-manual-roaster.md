@@ -4,7 +4,6 @@ status: planned
 phase: crawl
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
 budget: ~$130 in new parts
 based_on: 'https://makezine.com/projects/simple-sifter-coffee-roaster/ (Larry Cotton, Make: Magazine, 2019)'

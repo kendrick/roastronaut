@@ -4,7 +4,6 @@ status: planned
 phase: walk
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
 prerequisite: Phase 1 (Crawl) complete and stable
 budget: ~$50 in new parts

@@ -4,7 +4,6 @@ status: active
 phase: zero
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
 prerequisite: None — this is the entry point
 budget: ~$55–$65 in new parts (all carries forward to Phase 1)
@@ -201,7 +200,7 @@ That's a meaningful chunk of integration risk flushed before fabrication starts.
 | Sifter support     | Wire rack + bricks                   | Hands-free, scrounge-able, no fab                                                                                           |
 | Probe entry        | Through lid opening, taped to handle | Doubles as a dry run for Phase 1's permanent install                                                                        |
 | AI touchpoint      | Required for phase completion        | Whole point of Phase 0 is flushing integration risk; the LLM call is the riskiest unfamiliar piece                          |
-| LLM provider       | Anthropic API                        | Aligns with rest of homeops stack; <$1 in credit covers Phase 0                                                             |
+| LLM provider       | Anthropic API                        | Already have an API key and account; same provider planned for the Phase 3 AI layer; <$1 in credit covers Phase 0           |
 | Soldering          | None                                 | Breadboard everything; saves a tooling decision for later                                                                   |
 | Cooling            | Metal bowl + stir                    | Phase 1's cooling station is overkill for Phase 0 batch sizes                                                               |
 

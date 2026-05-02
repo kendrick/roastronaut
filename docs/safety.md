@@ -3,7 +3,6 @@ title: Safety
 status: active
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
   - roastronaut
 ---

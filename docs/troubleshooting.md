@@ -3,7 +3,6 @@ title: Troubleshooting
 status: stub
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
   - roastronaut
 ---

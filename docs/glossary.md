@@ -3,7 +3,6 @@ title: Glossary
 status: reference
 created: 2026-05-01
 related:
-  - homeops
   - roastronaut
 ---
 

@@ -3,7 +3,6 @@ title: Roast Log Schema
 status: active
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
   - roastronaut
 ---

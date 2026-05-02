@@ -4,7 +4,6 @@ status: planned
 phase: run
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
 prerequisite: Phase 2 (Walk) complete and stable; at least 5 logged roasts in storage
 budget: ~$30 in new parts (assumes homelab can host inference; otherwise add API costs)
@@ -56,7 +55,7 @@ If you use a hosted API instead:
 - **Post-mortem critique** (one text call per roast with full telemetry): roughly $0.02–$0.05 per roast.
 - Total: well under $0.50/roast even on hosted, which is fine if you roast a few times a week.
 
-Local-first is more in line with your homeops principles. Use hosted as a fallback while you're standing up local inference, or for the post-mortem call where latency matters less than reasoning quality.
+Local-first is the right answer if you've got the infrastructure for it (privacy stays intact, cost is electricity, latency is whatever your hardware delivers). Use hosted as a fallback while you're standing up local inference, or for the post-mortem call where latency matters less than reasoning quality.
 
 ## Build Sequence
 

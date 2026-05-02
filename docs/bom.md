@@ -3,7 +3,6 @@ title: Bill of Materials
 status: reference
 created: 2026-05-01
 related:
-  - homeops
   - roastronaut
 ---
 

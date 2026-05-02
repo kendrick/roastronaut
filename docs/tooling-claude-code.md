@@ -3,7 +3,6 @@ title: Tooling - Claude Code
 status: active
 created: 2026-05-01
 related:
-  - homeops
   - home-assistant
   - claude-code
   - roastronaut
@@ -162,7 +161,7 @@ It permits:
 
 | Decision | Choice | Rationale |
 | --- | --- | --- |
-| LLM provider for build-time coding | Claude Code | The user already runs it; consistent with the homeops stack. |
+| LLM provider for build-time coding | Claude Code | The user already runs it; no reason to bring in a second coding agent for this project. |
 | Where the prompts live | This file | Version-controlled, diffable, separable from HA config. HA imports them; this doc owns them. |
 | Custom UI for the dashboard | No | Lovelace stock cards do enough. Building a custom React card is the trap. |
 | Audio FFT as a custom external component | Yes | No stock component covers it; bounded scope; single output binary sensor. |
