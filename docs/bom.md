@@ -51,8 +51,10 @@ See [phase-1-crawl-instrumented-manual-roaster.md](phases/phase-1-crawl-instrume
 | --- | --- | --- | --- | --- |
 | ½" project plywood, ~2'×2' | 1 sheet | $15 | now | Base, supports, stops. [link] |
 | 2×4 scrap, 6" length | 1 | free or $3 | now | Motor mount block. [link] |
-| Aluminum bar, 1/16" × 1½" × 24" | 1 | $12 | now | Brackets, paddles, crank rotator. [link] |
+| Aluminum bar, 1/16" × 1½" × 24" | 1 | $12 | now | Pivot bracket, motor mounting plate, crank rotator, wobble disc brackets (`k` and `L`). [link] |
 | Aluminum sheet, .020-.025" thick, 12" × 18" | 1 | $10 | now | Heat shield, nozzle bracket, wind-break funnel. [link] |
+| Aluminum stock, 1/16" thick, ~6" × 6" (or scrap pizza pan) | 1 | $5 | now | Wobble disc (5-1/2" round, 1/16" thick). The thinner sheet above isn't rigid enough for the spinning disc. [link] |
+| Flange coupling, 12mm bore (verify) | 0 or 1 | verify | later | Cotton's wobble disc PDF specs this coupling for his 100 RPM Greartisan. Our 60 RPM Greartisan likely uses the same 6mm shaft (so the existing coupling works), but verify shaft size before ordering. [link] |
 | ¼" wood dowel, 12" | 1 | $2 | now | Heat gun handle stop. [link] |
 | 10D common nail (3") | 1 | $1 | now | Sifter pivot pin. [link] |
 | Assorted #6 sheet metal and wood screws, 6-32 machine screws plus nuts | 1 kit | $12 | now | Whole build. [link] |

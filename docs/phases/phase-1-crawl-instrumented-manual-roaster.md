@@ -6,7 +6,9 @@ created: 2026-05-01
 related:
   - home-assistant
 budget: ~$130 in new parts
-based_on: 'https://makezine.com/projects/simple-sifter-coffee-roaster/ (Larry Cotton, Make: Magazine, 2019)'
+based_on:
+  - 'Larry Cotton, "Simple Sifter Coffee Roaster," Make: Magazine, Nov 2019 (https://makezine.com/projects/simple-sifter-coffee-roaster/) — base mechanical design'
+  - 'Larry Cotton, "Build a Pizza Pan, Red Tube, Wobble-Disk Coffee Roaster" (PDF in docs/attachments/) — wobble-disc agitator'
 ---
 
 # Roastronaut Phase 1 (Crawl): Instrumented Manual Roaster
@@ -16,10 +18,10 @@ based_on: 'https://makezine.com/projects/simple-sifter-coffee-roaster/ (Larry Co
 By the end of this phase, we'll have a working DIY heat-gun coffee roaster that:
 
 - Mechanically follows Larry Cotton's flour-sifter roaster design, with a handful of safety and quality-of-life improvements.
-- Logs **[bean-mass temperature (BT)](../glossary.md#bt-bean-mass-temperature)**, **[environmental temperature (ET)](../glossary.md#et-environmental-temperature)**, and **paddle motor speed** to Home Assistant in real time.
+- Logs **[bean-mass temperature (BT)](../glossary.md#bt-bean-mass-temperature)**, **[environmental temperature (ET)](../glossary.md#et-environmental-temperature)**, and **agitator motor speed** to Home Assistant in real time.
 - Surfaces a live **[rate-of-rise (RoR)](../glossary.md#ror-rate-of-rise)** curve while you roast.
 - Has a software-controlled kill switch on the heat gun via a [smart plug](../safety.md#smart-plug-hard-kill).
-- Has a [physical interlock](../safety.md#microswitch-interlock) (your hinge-lever microswitch) that disables the paddle motor when the sifter handle is lifted.
+- Has a [physical interlock](../safety.md#microswitch-interlock) (your hinge-lever microswitch) that disables the agitator motor when the sifter handle is lifted.
 
 ## Non-goals
 
@@ -37,20 +39,21 @@ Cotton's build is sound, but it was published in 2019 with no electronics layer 
 4. **Through-panel thermocouple connectors** so you can disconnect the sifter from the base without unsoldering anything.
 5. **[GFCI protection](../safety.md#gfci-extension-cord)** on the heat-gun circuit. The article mentions a 15A circuit; we go further.
 6. **Optional 3D-printed parts** to replace the hardest hand-fabbed pieces (pivot bracket, HG locator). Skip if you don't have a printer; the original aluminum/plywood versions work fine.
-7. **Slightly larger paddle-to-screen clearance** (1/8" instead of 1/16"). Cotton notes that one paddle dragging is OK; we'd rather have neither dragging because we want this thing to last more than a season.
+7. **Wobble-disc agitator from Cotton's newer "Pizza Pan / Red Tube" design** instead of the 2019 article's paddles-on-axle. Cotton has iterated on the wobble disc for years across multiple home-built roasters and considers it the key to even bean development. The mechanical interface is identical (same cut-down crankshaft, same motor mount and rotator on the outside), so this is a small additive change inside the sifter with a meaningful roast-quality payoff.
 
 ## Shopping List
 
 You already have: flour sifter, heat gun, 6mm flange couplings, Greartisan 12V 60RPM gearmotor, hinge-lever microswitch.
 
-### Mechanical / Structural (~$70)
+### Mechanical / Structural (~$75)
 
 | Item                                                              | Notes                                            | ~Price    |
 | ----------------------------------------------------------------- | ------------------------------------------------ | --------- |
 | ½" project plywood, ~2'×2'                                        | For base, supports, stops                        | $15       |
 | 2×4 scrap, 6" length                                              | Motor mount block                                | free / $3 |
-| Aluminum bar, 1/16" × 1½" × 24"                                   | For brackets, paddles, crank rotator             | $12       |
+| Aluminum bar, 1/16" × 1½" × 24"                                   | Pivot bracket, motor mounting plate, crank rotator, wobble disc brackets (k, L) | $12       |
 | Aluminum sheet, .020–.025" thick, 12" × 18"                       | Heat shield + nozzle bracket + wind-break funnel | $10       |
+| Aluminum stock, 1/16" thick, ~6"×6" (or scrap pizza pan)          | Wobble disc (5-1/2" round). The thinner sheet above isn't rigid enough for the spinning disc | $5        |
 | ¼" wood dowel, 12"                                                | Heat gun handle stop                             | $2        |
 | 10D common nail (3")                                              | Sifter pivot pin                                 | $1        |
 | Assorted #6 sheet metal & wood screws, 6-32 machine screws + nuts | Whole build                                      | $12       |
@@ -80,7 +83,7 @@ You already have: flour sifter, heat gun, 6mm flange couplings, Greartisan 12V 6
 | --------------------------------------- | ------------------------------------------------------- | ------ |
 | GFCI extension cord, 14 AWG, 15A, 25 ft | Mandatory. The roaster is going outside or in a garage. | $25    |
 
-**Phase 1 total: ~$155** (you'll spend less if you have a box fan and some hardware on hand).
+**Phase 1 total: ~$160** (you'll spend less if you have a box fan and some hardware on hand).
 
 ## Build Sequence
 
@@ -96,16 +99,32 @@ Mount the two pivot supports and the handle stop to the base from underneath wit
 
 ![flour-sifter-coffee-roaster-fig-c](attachments/flour-sifter-coffee-roaster-fig-c.png)
 
-### Step 2: Modify the Flour Sifter
+### Step 2: Modify the Flour Sifter and Build the Wobble Disc Agitator
 
-This is unchanged from Cotton's article:
+This is where we depart from Cotton's 2019 article and adopt the agitator from his newer Pizza Pan / Red Tube / Wobble-Disk design. Same sifter crankshaft, same motor mount, but the inside-the-sifter paddle assembly is replaced by a 5-1/2" aluminum disc mounted at 45° to the shaft. The disc wobbles as it rotates and agitates the beans more evenly than the original paddles.
 
 1. Remove the brass nut on the hand-crank axle. Save it.
 2. Discard the nylon washer.
-3. Hold the agitator while turning the axle counterclockwise to unscrew the axle. Pull out and discard the agitator.
+3. Hold the original agitator while turning the axle counterclockwise to unscrew the axle. Pull the axle out and discard the original paddles.
 4. Hacksaw or break off the black plastic crank knob.
-5. With the crank in a vise, hacksaw it down to about ½" of stub and file smooth. (See Figure J below for finished length.)
-6. Reinsert the axle and replace the brass nut.
+5. With the crank in a vise, hacksaw it down to about ½" of stub and file smooth. (See Figure J in Step 4 for finished length.)
+6. Cut a 5-1/2" diameter disc from 1/16" aluminum sheet stock. File or sand the rim smooth.
+7. Drill a 1/4" hole in the center of the disc **at a 45° angle**. A drill press is strongly preferred; without one, clamp the disc vertically in a vise and tilt the drill to 45° gradually as the bit cuts. The 45° angle is what makes the disc wobble; without it, the disc just spins flat.
+
+   ![figure-16-drilling-45-degree-disc-hole](attachments/wobble-disc/figure-16-drilling-45-degree-disc-hole.png)
+
+8. Fabricate the two wobble-disc brackets `k` and `L` per Cotton's dimensioned drawing. Cut from aluminum sheet stock; drill the hole pairs at the centers of their flat areas; bend bracket `k` to 135°.
+
+   ![figure-03-wobble-disc-and-bracket-dimensions](attachments/wobble-disc/figure-03-wobble-disc-and-bracket-dimensions.png)
+
+9. Loosely assemble the disc and brackets with 6-32 machine screws and nuts. Keep the nuts accessible for final tightening.
+10. Reinsert the sifter axle, routing it through the bracket-and-disc assembly inside the sifter as you go: push the shaft halfway in, through the two brackets, through the disc's 45° hole, then continue through to the other side. Replace the brass cap nut.
+11. Add a short 6-32 machine screw and nut through the third hole in bracket `k` to lock it to the disc. Tighten thoroughly.
+12. Center the disc inside the sifter and tighten the two bracket nuts. Spin the shaft by hand: the disc rim must clear the sifter sieve at all points (aim for ~3mm clearance, never touching). If interference persists, gently reposition the disc, or trim the disc rim locally and minimally.
+
+   ![figure-17-wobble-disc-mounted-on-shaft](attachments/wobble-disc/figure-17-wobble-disc-mounted-on-shaft.png)
+
+> **Why the wobble disc instead of paddles?** Cotton iterated on the disc design for years across multiple home-built roasters and considers it the key to even bean development. The mechanical interface is identical to the 2019 paddle build (same crankshaft, same motor engagement on the outside), so adopting it is a small additive change with a tangibly better roast as the payoff.
 
 ### Step 3: Make the Wood and Aluminum Parts
 
@@ -168,26 +187,7 @@ Position everything per Cotton's Figures Q–T: heat gun under the sifter, nozzl
 
 ![figure-t-handle-trap-dowel](attachments/figure-t-handle-trap-dowel.png)
 
-### Step 6: Make the Paddles
-
-Follow Cotton's Figure U for paddle dimensions. Round the curved ends to match the sifter screen radius (~3").
-
-The drilling and twisting procedure is unchanged (Figures U and V):
-
-1. Clamp both paddles overlapped, drill four 7/64" holes through both at once at the dimensions shown.
-2. Tap one paddle's holes for 6-32 machine screws.
-3. Drill the other paddle's holes out to 5/32".
-4. Twist each paddle in opposite directions, ~25–30°, using a slotted scrap-wood "twister."
-
-> **Upgrade:** Aim for a **1/8" paddle-to-screen clearance** rather than the 1/16" Cotton suggests. You lose a small amount of bean agitation but you protect the screen. Bean stalls between paddle and rim are catastrophic for a roast… better margin is worth it.
-
-![figure-u-paddle-dimensions-and-drilling](attachments/figure-u-paddle-dimensions-and-drilling.png)
-
-![figure-v-twisting-paddles-in-a-vise](attachments/figure-v-twisting-paddles-in-a-vise.png)
-
-![figure-w-paddles-mounted-on-axle](attachments/figure-w-paddles-mounted-on-axle.png)
-
-### Step 7: Install Thermocouples (NEW)
+### Step 6: Install Thermocouples (NEW)
 
 This is the upgrade that makes the whole project worth doing.
 
@@ -206,7 +206,7 @@ This is the upgrade that makes the whole project worth doing.
 
 The panel-mount jacks let you completely disconnect the sifter from the base for service, just by unplugging two K-type connectors and one DC power lead.
 
-### Step 8: Build the Cooling Station (NEW, Replaces Fan-bracket version)
+### Step 7: Build the Cooling Station (NEW, Replaces Fan-bracket version)
 
 Cotton's fan-bracket-and-tray version is mechanically clever but it bloats the base. We're doing something simpler.
 
@@ -218,7 +218,7 @@ That's the whole cooling station. After roasting, you tip the sifter to dump bea
 
 It's cheaper than Cotton's version, easier to clean, and works with bigger batches if you ever want to scale up.
 
-### Step 9: Wire the Electronics Enclosure (NEW)
+### Step 8: Wire the Electronics Enclosure (NEW)
 
 The only stage where you'll spend real time on something the Make: article doesn't cover. Keeping it high-level since you said you'd handle code and config later.
 
@@ -267,7 +267,7 @@ Before you load any beans:
 - [ ] Both thermocouples reading reasonable room temp (~70–90°F) before you start.
 - [ ] Lift the sifter handle, confirm the motor stops. Set it back down, confirm motor resumes.
 - [ ] Toggle the smart plug from HA. Confirm the heat gun's indicator light goes on/off accordingly.
-- [ ] Manually rotate the paddles by hand (motor unpowered) to verify no screen drag.
+- [ ] Manually rotate the wobble disc by hand (motor unpowered) to verify the rim clears the sieve at all points.
 
 Then load 1 cup of green beans, motor on, heat gun on low, and watch the BT curve climb. Pull when you hear/see the roast you want, same as the original article.
 
@@ -293,9 +293,11 @@ If any of those don't pass, fix in Phase 1 before adding more complexity. The wh
 | Cooling          | Box fan + perforated pan | Simpler than the article's fan-bracket version, decouples cooling from roaster, scales |
 | Heat gun control | Smart plug               | Phase 1 is telemetry-only on the heat side; on/off is enough. AC dimmer is Phase 2.    |
 | Base size        | Small                    | We don't need the bigger fan-tray base                                                 |
+| Agitator         | Wobble disc (Cotton's newer design) | Better even-development per Cotton's iterations. Replaces the 2019 article's paddles-on-axle. Bolts to the same cut-down crankshaft, so the motor + rotator engagement on the outside stays unchanged and Phase 2's auto-dump is unaffected. |
 
 ## Credits & References
 
-- Larry Cotton, "Simple Sifter Coffee Roaster," _Make: Magazine_, Nov 2019. [Source](https://makezine.com/projects/simple-sifter-coffee-roaster/) — all figures embedded above are his.
-- Adafruit MAX31856 documentation — https://www.adafruit.com/product/3263
-- ESPHome thermocouple component docs — https://esphome.io/components/sensor/max31856.html
+- Larry Cotton, "Simple Sifter Coffee Roaster," _Make: Magazine_, Nov 2019. [Source](https://makezine.com/projects/simple-sifter-coffee-roaster/). Base mechanical design (sifter modifications, motor mount, pivot, heat gun mounting). Most figures in the build sequence below are from this article.
+- Larry Cotton, "Build a Pizza Pan, Red Tube, Wobble-Disk Coffee Roaster." [Local PDF](../attachments/Wobble-Disc-Coffee-Roaster-3-red-tubes-model-build-instructions.pdf). Source for the wobble disc agitator and the figure-03 / figure-16 / figure-17 embeds in Step 2.
+- Adafruit MAX31856 documentation: https://www.adafruit.com/product/3263
+- ESPHome thermocouple component docs: https://esphome.io/components/sensor/max31856.html

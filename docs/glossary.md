@@ -70,6 +70,10 @@ The K-type thermocouple in the airstream between the heat gun nozzle and the sif
 
 The aluminum tube introduced in Phase 3 that holds the ESP32-CAM 8-12" above the sifter. Puts the camera in room air so the OV2640 sensor doesn't cook in the rising exhaust column.
 
+### Wobble disc
+
+The 5-1/2" aluminum agitator disc, mounted at 45° on the sifter crankshaft, that replaces the sifter's original paddle-and-axle agitator inside the sifter. Adopted from Larry Cotton's newer Pizza Pan / Red Tube / Wobble-Disk design; Cotton considers it the key to even bean development.
+
 ### Hard kill
 
 The smart plug in series with the heat gun. HA can cut it instantly on overtemp or interlock trip; it stays in the chain even after Phase 2 introduces the AC dimmer for normal heat control. See safety.md for the full layered story.
