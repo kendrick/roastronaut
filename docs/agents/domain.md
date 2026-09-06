@@ -7,24 +7,15 @@ How the engineering skills should consume this repo's domain documentation when 
 - **[`docs/glossary.md`](../glossary.md)**: this repo's vocabulary.
 - **`docs/adr/`**: read ADRs that touch the area you're about to work in.
 
-**This repo has no `CONTEXT.md`, and should not grow one.** The format defines `CONTEXT.md` as a glossary and nothing else, and `docs/glossary.md` already fills that role, with anchors the phase docs link into on first use of a term. A second vocabulary file would only give terms two homes to drift between. Read the glossary where another repo's instructions would say `CONTEXT.md`, and put a new term there.
+**Vocabulary lives in [`docs/glossary.md`](../glossary.md).** Every phase doc links into its anchors on first use of a term, so a definition that moves breaks those links. Put new terms there, with an anchor.
 
-If `docs/adr/` is missing something you expected, **proceed silently**. Don't flag its absence; don't suggest creating ADRs upfront. The `/domain-modeling` skill (reached via `/grill-with-docs`) writes them when a decision actually gets resolved.
+One guardrail, because a skill will actively push the other way: `/domain-modeling` offers to start a `CONTEXT.md` when it resolves its first term. Decline. The glossary is this repo's answer to that file, and a second vocabulary file gives terms two homes to drift between.
 
-## File structure
+Where `docs/adr/` has nothing on your area, **proceed silently**: write the work, and let `/domain-modeling` record a decision when one actually gets made.
 
-```
-/
-├── docs/
-│   ├── glossary.md                    ← vocabulary, anchored per term
-│   ├── adr/
-│   │   ├── 0001-drop-temperature-is-a-proxy-not-ground-truth.md
-│   │   └── 0002-observed-roast-level-is-graded-on-cooled-beans.md
-│   └── phases/                        ← one doc per implementation phase
-└── README.md
-```
+## What the repo holds
 
-There is no `src/` yet. The docs are the deliverable through Phase 0, and the first code to land will be ESPHome YAML and HA automations rather than an application tree.
+The docs are the deliverable through Phase 0, so there is no `src/` yet, and the first code to land will be ESPHome YAML and HA automations rather than an application tree. Read the directory itself for what exists; it cannot go stale the way a copy here would.
 
 ## Use the glossary's vocabulary
 

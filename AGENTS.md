@@ -16,7 +16,7 @@ Claude Code reads `CLAUDE.md`, which imports this file. Edit this one.
 
 ### Issue tracker
 
-Issues live in this repo's GitHub Issues. See [docs/agents/issue-tracker.md](docs/agents/issue-tracker.md).
+GitHub Issues, reached through the MCP tools wherever `gh` is absent. See [docs/agents/issue-tracker.md](docs/agents/issue-tracker.md).
 
 ### Triage labels
 
@@ -24,4 +24,4 @@ The five canonical triage roles, each label string equal to its role name. See [
 
 ### Domain docs
 
-Vocabulary lives in [docs/glossary.md](docs/glossary.md), which the phase docs link into on first use of a term, and decisions live in [docs/adr/](docs/adr/). There is no `CONTEXT.md` and there shouldn't be one. See [docs/agents/domain.md](docs/agents/domain.md).
+Vocabulary in [docs/glossary.md](docs/glossary.md), decisions in [docs/adr/](docs/adr/). See [docs/agents/domain.md](docs/agents/domain.md).
