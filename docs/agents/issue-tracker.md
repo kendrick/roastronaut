@@ -4,7 +4,7 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 
 ## When `gh` is missing
 
-Remote Claude Code containers ship without `gh`. Where it is absent, read every command below as the intent rather than the transport, and reach GitHub through the MCP tools or the REST API instead. `gh issue view 42 --comments` and an `issue_read` call return the same issue. A missing CLI is never a reason to skip a step or to fall back to local markdown.
+Remote Claude Code containers ship without `gh`. Where it is absent, read every command below as the intent rather than the transport, and reach GitHub through the MCP tools or the REST API. `gh issue view 42 --comments` and an `issue_read` call return the same issue, so every operation in this file stays available and the step still gets done.
 
 ## Conventions
 
