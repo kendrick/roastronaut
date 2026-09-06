@@ -22,13 +22,15 @@ The temperature of the air inside the roasting chamber, measured by a probe in t
 
 The first derivative of bean temperature, expressed in °F per minute in this project. Roasters live and die by RoR; a flat or crashing RoR after first crack usually means a stalled or baked roast.
 
-### SCAA roast levels
+### Roast level
 
-The Specialty Coffee Association's eight-point scale running from 1 (green) through 8 (Italian / Vienna). Common waypoints are light at 2-3, medium at 4-5, dark at 6-7. From Phase 3 onward two different readings land on this scale, one from you and one from the vision model, so say which one you mean: see observed roast level and model roast level below.
+This project's own eight-point scale, running from 1 (green) through 8 (very dark). Common waypoints are light at 2-3, medium at 4-5, dark at 6-7. It is a house scale and not a published standard: the Specialty Coffee Association, credited here until recently, publishes no ordinal roast level scale and was still drafting one as of late 2025. See [the research notes](research/scaa-roast-level-scale.md) for what the SCA does publish.
+
+From Phase 3 onward two different readings land on this scale, one from you and one from the vision model, so say which one you mean: see observed roast level and model roast level below.
 
 ### Observed roast level
 
-Your own reading of the finished roast, taken from cooled beans at rest and recorded as `roast_level_observed`. This is the reference the vision model is scored against. It deliberately does not match the model's viewing conditions, because a SCAA level is conventionally assessed on cooled beans and that is the reading you could defend to another roaster weeks later.
+Your own reading of the finished roast, taken from cooled beans at rest and recorded as `roast_level_observed`. This is the reference the vision model is scored against. It deliberately does not match the model's viewing conditions, because a roast level is conventionally read off cooled beans and that is the reading you could defend to another roaster weeks later.
 
 ### Model roast level
 

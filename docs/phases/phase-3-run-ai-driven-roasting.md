@@ -16,7 +16,7 @@ budget: ~$30 in new parts (assumes homelab can host inference; otherwise add API
 By the end of this phase, the roaster:
 
 - **Sees the beans** via an ESP32-CAM mounted to peek through the sifter screen, streaming frames to HA throughout the roast.
-- **Grades the roast in real time** using a multimodal model (local via Ollama, or hosted via API), outputs an estimated [SCAA roast level](../glossary.md#scaa-roast-levels) and a "drop now / wait" recommendation overlaid on the dashboard.
+- **Grades the roast in real time** using a multimodal model (local via Ollama, or hosted via API), outputs an estimated [roast level](../glossary.md#roast-level) and a "drop now / wait" recommendation overlaid on the dashboard.
 - **Critiques the roast post-mortem**. At the end of each roast, an HA script bundles [BT](../glossary.md#bt-bean-mass-temperature)/[RoR](../glossary.md#ror-rate-of-rise)/audio/vision data and asks an LLM to evaluate the roast and suggest profile adjustments.
 - **Suggests starting profiles** for new beans based on origin info plus your own roaster's history with similar beans.
 
@@ -195,4 +195,4 @@ These belong in a separate doc if/when you actually pursue them:
 - Phase 1 mechanical design adapted from Larry Cotton's Make: article (see [phase-1-crawl-instrumented-manual-roaster.md](phase-1-crawl-instrumented-manual-roaster.md)).
 - Ollama: https://ollama.com
 - ESPHome ESP32-CAM component: https://esphome.io/components/esp32_camera.html
-- SCAA roast level reference: https://sca.coffee/research/coffee-standards
+- SCA coffee standards, which cover roast colour as Agtron readings rather than an ordinal scale: https://sca.coffee/research/coffee-standards

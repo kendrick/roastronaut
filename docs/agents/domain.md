@@ -21,7 +21,7 @@ The docs are the deliverable through Phase 0, so there is no `src/` yet, and the
 
 When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in [`docs/glossary.md`](../glossary.md). Don't drift to synonyms an entry marks under `_Avoid_`: write "drop" rather than "dump" in prose, and keep "dump" for the HA button and servo command that are literally named that.
 
-Watch the terms that differ by one word. `roast_level_observed` and `roast_level_model` are both SCAA levels and they are not interchangeable: one is the reference, the other is the thing being measured.
+Watch the terms that differ by one word. `roast_level_observed` and `roast_level_model` are both roast levels and they are not interchangeable: one is the reference, the other is the thing being measured.
 
 If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap. On a real gap, add the term to `docs/glossary.md` with an anchor, and note it for `/domain-modeling`.
 
