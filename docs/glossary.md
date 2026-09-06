@@ -24,7 +24,9 @@ The first derivative of bean temperature, expressed in °F per minute in this pr
 
 ### Roast level
 
-This project's own eight-point scale, running from 1 (green) through 8 (very dark). Common waypoints are light at 2-3, medium at 4-5, dark at 6-7. It is a house scale and not a published standard: the Specialty Coffee Association, credited here until recently, publishes no ordinal roast level scale and was still drafting one as of late 2025. See [the research notes](research/scaa-roast-level-scale.md) for what the SCA does publish.
+This project's own nine-point scale. Level 1 is green, unroasted coffee. Levels 2 through 9 are the eight tiles of the SCA Agtron roast colour set in order, so the scale is an index into a card you can hold against the beans: 2 is tile #95 "Very Light", then #85, #75, #65, #55, #45, #35, and 9 is #25 "Very Dark". A realistic home-roasting band is about 4 through 7.
+
+It is a house scale, not a published standard. The SCA publishes no ordinal roast level scale, the tile numbers are Agtron reflectance values that run the opposite way (higher is lighter), and green has no tile at all. That missing green tile is why the scale has nine levels rather than eight. See [ADR-0003](adr/0003-roast-level-indexes-the-agtron-tiles-with-a-slot-for-green.md), and [the research notes](research/scaa-roast-level-scale.md) for what the SCA does publish.
 
 From Phase 3 onward two different readings land on this scale, one from you and one from the vision model, so say which one you mean: see observed roast level and model roast level below.
 

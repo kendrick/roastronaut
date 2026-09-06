@@ -83,8 +83,14 @@ This image shows coffee beans during a roast, viewed from above through the
 top of the chamber. The background may include some shimmer from the rising
 heat column.
 
-Estimate the current SCAA roast level on a 1-8 scale (1 = green, 4 = medium,
-8 = Italian / Vienna). Look at color uniformity, surface oil, and char.
+Estimate the roast level on this project's 1-9 scale. Level 1 is green,
+unroasted coffee. Levels 2 through 9 correspond in order to the eight SCA
+Agtron roast colour tiles, from #95 "Very Light" at level 2 down to #25
+"Very Dark" at level 9, so level 5 is roughly a medium roast. This is a
+house scale, not a published standard, so grade against the description
+above rather than any scale you may recall.
+
+Look at color uniformity, surface oil, and char.
 
 Respond as JSON only, with no other text:
 
@@ -123,7 +129,9 @@ I'm about to roast a new green coffee. Here is what I know about it:
 
 {bean_origin_notes}
 
-My target roast level is {target_level} (SCAA scale).
+My target roast level is {target_level} on this project's 1-9 scale, where 1
+is green and levels 2 through 9 index the eight SCA Agtron colour tiles from
+#95 down to #25.
 
 Below are summaries of my last roasts on similar beans (same origin, similar
 processing, similar target level):

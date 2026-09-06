@@ -29,8 +29,9 @@ See [phase-0-smoke-test-hand-cranked-validation.md](phases/phase-0-smoke-test-ha
 | Solderless breadboard plus Dupont jumper kit | 1 | $8 | now | Phase 0 only; saved for next bench project. [link] |
 | Stainless wire cooling rack | 1 | $10 | now | Sifter jig support. [link] |
 | Bricks (or stacks of hardback books) | 4 | scrounge | now | Sifter jig stand. [link] |
+| Roast colour card (Roastrite RC-790, or Sweet Maria's card at ~$3) | 1 | $20 | optional | Physical reference for [roast level](glossary.md#roast-level); the eight tile numbers your scale indexes. Optional because you can grade by eye and re-grade from photos later. Not the $290 SCA Agtron kit. [link] |
 
-**Phase 0 subtotal (new parts): ~$86 listed, ~$60 with substitutions.** Every item except the breadboard kit ($8) carries forward.
+**Phase 0 subtotal (new parts): ~$86 listed, ~$60 with substitutions.** Every item except the breadboard kit ($8) carries forward. The colour card is excluded from both totals, being optional.
 
 ## Phase 1: Crawl
 
