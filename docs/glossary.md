@@ -24,7 +24,19 @@ The first derivative of bean temperature, expressed in °F per minute in this pr
 
 ### SCAA roast levels
 
-The Specialty Coffee Association's eight-point scale running from 1 (green) through 8 (Italian / Vienna). This is the target output of the Phase 3 vision grader; common waypoints are light at 2-3, medium at 4-5, dark at 6-7.
+The Specialty Coffee Association's eight-point scale running from 1 (green) through 8 (Italian / Vienna). Common waypoints are light at 2-3, medium at 4-5, dark at 6-7. From Phase 3 onward two different readings land on this scale, one from you and one from the vision model, so say which one you mean: see observed roast level and model roast level below.
+
+### Observed roast level
+
+Your own reading of the finished roast, taken from cooled beans at rest and recorded as `roast_level_observed`. This is the reference the vision model is scored against. It deliberately does not match the model's viewing conditions, because a SCAA level is conventionally assessed on cooled beans and that is the reading you could defend to another roaster weeks later.
+
+### Model roast level
+
+The vision model's estimate during the roast, sampled about every ten seconds from the in-chamber camera and recorded as `roast_level_model`. Never the reference; always the thing being measured.
+
+### Paired observation
+
+One roast carrying both an observed roast level and a model roast level, so the two can be compared. Pairs exist only from Phase 3 onward, since nothing produces a model roast level before then. A roast logged in Phase 0 through 2 has an observed level and no pair, which is why the count of logged roasts always runs ahead of the count of pairs.
 
 ### First crack
 
@@ -76,11 +88,9 @@ The smart plug in series with the heat gun. HA can cut it instantly on overtemp 
 
 ### Drop
 
-The act of dumping beans out of the roasting chamber at end of roast, into the cooling station. Phase 1 you tip the sifter by hand; Phase 2 a servo does it on command; Phase 3 still leaves the trigger to you.
+Tipping the beans out of the roasting chamber at end of roast, into the cooling station. Phase 1 you tip the sifter by hand; Phase 2 a servo does it on command; Phase 3 still leaves the trigger to you.
 
-### Dump
-
-Synonymous with drop in this project. The HA button label and the Phase 2 servo command both use "dump".
+_Avoid_: Dump, in prose. The word survives as a literal identifier, since the HA button label and the Phase 2 servo command are both named "dump", and renaming a wired-up entity costs more than the inconsistency does.
 
 ### Cooling station
 

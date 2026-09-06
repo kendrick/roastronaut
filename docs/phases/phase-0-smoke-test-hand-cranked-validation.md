@@ -161,6 +161,7 @@ The first time this works end-to-end, take a screenshot. That moment is what Pha
 7. When you're done, **turn the heat gun off first**, then dump the beans into the metal bowl and stir vigorously to cool them. Or pour onto the cooling rack and shake.
 8. Tap the **"Roast Complete"** button on your HA dashboard.
 9. Wait 10–30 seconds. Read the LLM critique.
+10. Once the beans are cool and rested, look at them and record a [SCAA roast level](../glossary.md#scaa-roast-levels) as `roast_level_observed`. Ten seconds of work, and it is the only reason Phase 3 will later be able to tell a working vision grader from a lucky one. See [roast-log-schema.md](../roast-log-schema.md).
 
 Your arm will be tired. That's intended.
 

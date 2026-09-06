@@ -24,4 +24,4 @@ The five canonical triage roles, each label string equal to its role name. See [
 
 ### Domain docs
 
-Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. Term definitions stay in [docs/glossary.md](docs/glossary.md), which the phase docs already link into. See [docs/agents/domain.md](docs/agents/domain.md).
+Vocabulary lives in [docs/glossary.md](docs/glossary.md), which the phase docs link into on first use of a term, and decisions live in [docs/adr/](docs/adr/). There is no `CONTEXT.md` and there shouldn't be one. See [docs/agents/domain.md](docs/agents/domain.md).

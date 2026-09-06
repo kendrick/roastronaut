@@ -4,45 +4,33 @@ How the engineering skills should consume this repo's domain documentation when 
 
 ## Before exploring, read these
 
-- **`CONTEXT.md`** at the repo root, or
-- **`CONTEXT-MAP.md`** at the repo root if it exists: it points at one `CONTEXT.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
+- **[`docs/glossary.md`](../glossary.md)**: this repo's vocabulary.
+- **`docs/adr/`**: read ADRs that touch the area you're about to work in.
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
+**This repo has no `CONTEXT.md`, and should not grow one.** The format defines `CONTEXT.md` as a glossary and nothing else, and `docs/glossary.md` already fills that role, with anchors the phase docs link into on first use of a term. A second vocabulary file would only give terms two homes to drift between. Read the glossary where another repo's instructions would say `CONTEXT.md`, and put a new term there.
+
+If `docs/adr/` is missing something you expected, **proceed silently**. Don't flag its absence; don't suggest creating ADRs upfront. The `/domain-modeling` skill (reached via `/grill-with-docs`) writes them when a decision actually gets resolved.
 
 ## File structure
 
-Single-context repo (most repos):
-
 ```
 /
-├── CONTEXT.md
-├── docs/adr/
-│   ├── 0001-event-sourced-orders.md
-│   └── 0002-postgres-for-write-model.md
-└── src/
+├── docs/
+│   ├── glossary.md                    ← vocabulary, anchored per term
+│   ├── adr/
+│   │   ├── 0001-drop-temperature-is-a-proxy-not-ground-truth.md
+│   │   └── 0002-observed-roast-level-is-graded-on-cooled-beans.md
+│   └── phases/                        ← one doc per implementation phase
+└── README.md
 ```
 
-Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
-
-```
-/
-├── CONTEXT-MAP.md
-├── docs/adr/                          ← system-wide decisions
-└── src/
-    ├── ordering/
-    │   ├── CONTEXT.md
-    │   └── docs/adr/                  ← context-specific decisions
-    └── billing/
-        ├── CONTEXT.md
-        └── docs/adr/
-```
+There is no `src/` yet. The docs are the deliverable through Phase 0, and the first code to land will be ESPHome YAML and HA automations rather than an application tree.
 
 ## Use the glossary's vocabulary
 
-**In this repo the glossary is [`docs/glossary.md`](../glossary.md), not `CONTEXT.md`.** It predates this file, every phase doc links into its anchors on first use of a term, and those links break if definitions move. So `CONTEXT.md` holds the project's shape and domain model, and `docs/glossary.md` owns term definitions.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in [`docs/glossary.md`](../glossary.md). Don't drift to synonyms an entry marks under `_Avoid_`: write "drop" rather than "dump" in prose, and keep "dump" for the HA button and servo command that are literally named that.
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `docs/glossary.md`. Don't drift to synonyms the glossary explicitly avoids: BT and ET are each one thing with one name.
+Watch the terms that differ by one word. `roast_level_observed` and `roast_level_model` are both SCAA levels and they are not interchangeable: one is the reference, the other is the thing being measured.
 
 If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap. On a real gap, add the term to `docs/glossary.md` with an anchor, and note it for `/domain-modeling`.
 
@@ -50,4 +38,4 @@ If the concept you need isn't in the glossary yet, that's a signal: either you'r
 
 If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
 
-> _Contradicts ADR-0007 (event-sourced orders), but worth reopening because…_
+> _Contradicts ADR-0001 (drop temperature is a proxy, not ground truth), but worth reopening because…_

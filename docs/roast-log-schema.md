@@ -33,7 +33,10 @@ Established in [Phase 0](phases/phase-0-smoke-test-hand-cranked-validation.md). 
 | `profile_name` | string or null | HA dropdown | In Phase 0 this is null (no profiles yet); preserved here for Phase 2+. |
 | `llm_critique` | string (markdown) | HA rest_command | Free-form critique returned by the post-mortem call. |
 | `subjective_notes` | string (markdown) | manual entry | Your notes during or after roast. Smell, sound, anything not telemetry. |
-| `cup_quality` | object: `{ score: int 1-10, notes: string }` | manual entry, days later | Filled in after you actually drink it. |
+| `cup_quality` | object: `{ score: int 1-10, assessed_at: ISO 8601, notes: string }` or null | manual entry, days later | Filled in after you actually drink it. Carries `assessed_at` because rest time changes what you taste, so an undated score is missing its most important qualifier. |
+| `roast_level_observed` | object: `{ level: int 1-8, assessed_at: ISO 8601, notes: string }` or null | manual entry, after cooling | Your own [SCAA roast level](glossary.md#scaa-roast-levels), read from cooled beans at rest. This is the reference the Phase 3 vision model gets scored against, which is why it lives here rather than in Phase 3: the habit and the baseline both need a running start. |
+
+Both manual fields stay null until you fill them, and both need a surface that lists what is outstanding plus some nudge to go do it. A field with nothing prompting it stays null forever, and Phase 3's validation needs at least 20 non-null `roast_level_observed` readings before it means anything. The mechanism is an implementation choice; the requirement is not.
 
 ### Phase 1 additions
 
@@ -61,7 +64,7 @@ Added in [Phase 3](phases/phase-3-run-ai-driven-roasting.md):
 
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
-| `visual_roast_level` | time series of (offset_seconds, level int 1-8, confidence float 0-1, notes string) | HA + vision model | One sample every ~10 seconds. [SCAA scale](glossary.md#scaa-roast-levels). |
+| `roast_level_model` | time series of (offset_seconds, level int 1-8, confidence float 0-1, notes string) | HA + vision model | One sample every ~10 seconds on the [SCAA scale](glossary.md#scaa-roast-levels). Scored against `roast_level_observed`; a roast carrying both is a paired observation. |
 | `camera_frame_refs` | list of (offset_seconds, path or url) | HA camera entity | References, not blobs. Frames live wherever HA stores camera snapshots; this list lets you find them again. |
 
 ## Storage Backend
@@ -108,7 +111,13 @@ A Phase 2 roast (Phase 3 fields would be additions, not replacements):
   "subjective_notes": "Smelled grassy through 5 minutes, then turned bready. First crack popped clean, easy to time.",
   "cup_quality": {
     "score": 7,
+    "assessed_at": "2026-04-15T08:10:00-07:00",
     "notes": "Bright. Floral. A little flat on the finish, probably from the slow development."
+  },
+  "roast_level_observed": {
+    "level": 4,
+    "assessed_at": "2026-04-13T09:02:00-07:00",
+    "notes": "Even colour across the batch. Couple of scorched flats near the screen edge."
   },
   "env_temp": [[0, 81.2], [1, 82.0]],
   "motor_speed": [[0, 60], [1, 60]],
@@ -128,4 +137,8 @@ Time-series arrays are truncated above; in practice each one has roughly one sam
 | `roast_id` as ULID | Yes | Sortable by time, no central ID server, 26 chars in JSON. |
 | `ror` stored, not just derived | Yes | Multiple consumers (dashboards, post-mortem prompts, recipe model) all need it. Compute once at sample time. |
 | Camera frames as references, not blobs | Yes | Frames are heavy. Keeping them out of the roast log lets you purge frame storage independently of the roast record. |
+| `roast_level_observed` introduced in Phase 0 | Yes | Phase 3 scores the vision model against it, and both the grading habit and the majority-class baseline want a long running start. Adding it now costs an edit; adding it later costs a migration. See [ADR-0002](adr/0002-observed-roast-level-is-graded-on-cooled-beans.md). |
+| Actor in the field name, not the sensing method | Yes | `roast_level_observed` and `roast_level_model` beat `manual_` and `visual_`, since you use your eyes too and the real difference is who is judging. Renamed while Phase 3 was still unbuilt, when additivity still allowed it. |
+| Roast level separate from `cup_quality` | Yes | How dark it got and how it tasted are different axes. Only the first can validate a vision model, and burying it in `cup_quality.notes` makes it unqueryable. |
+| Agreement not stored per roast | Correct | Agreement is a property of a set of paired observations, not of one roast, and it is meaningless below about 20. A per-roast field would invite exactly the arithmetic Phase 3 should not be doing. |
 | Storage backend | Defer | Both InfluxDB and HA recorder are reasonable. The right answer depends on Phase 2 / Phase 3 usage patterns; pick before the end of Phase 1. |
