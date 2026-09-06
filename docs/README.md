@@ -8,7 +8,7 @@ related:
 
 # Roastronaut Docs
 
-Roastronaut docs are split into two layers: cross-cutting reference and operational docs at this top level, and one doc per implementation phase under [phases/](phases/).
+Roastronaut docs are split into three layers: cross-cutting reference and operational docs at this top level, one doc per implementation phase under [phases/](phases/), and the decision record under [adr/](adr/) for choices that would otherwise read as arbitrary later.
 
 If you're landing fresh, start with [phases/README.md](phases/README.md) for the four-phase plan, or jump straight to a cross-cutting doc below.
 
@@ -22,6 +22,7 @@ If you're landing fresh, start with [phases/README.md](phases/README.md) for the
 | [tooling-claude-code.md](tooling-claude-code.md) | active    | Where Claude Code earns its keep on this project, plus the four LLM prompts (version-controlled here, not in HA configs).               |
 | [bom.md](bom.md)                                 | reference | Per-phase bill of materials with running totals. `[link]` placeholders to fill in once vendors are picked.                              |
 | [troubleshooting.md](troubleshooting.md)         | stub      | Lives empty for now. Grows entry-by-entry as we hit real problems during the build.                                                     |
+| [adr/](adr/)                                     | active    | Decisions that are hard to reverse and surprising without their reasoning. Two so far, both about how Phase 3's vision grader gets validated. |
 
 ## Phase Docs
 

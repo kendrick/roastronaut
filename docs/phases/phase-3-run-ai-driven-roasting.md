@@ -110,7 +110,7 @@ The flow:
 
 1. Every 10 seconds during an active roast, an HA automation grabs the current camera frame.
 2. Sends it to the vision model with a prompt like: "These are coffee beans being roasted. Estimate the current SCAA roast level on a 1–8 scale (1=green, 8=Italian/Vienna). Look at color uniformity, surface oil, and char. Respond as JSON: `{level: int, confidence: float, notes: str}`."
-3. The model's response is parsed and exposed as `sensor.roastronaut_visual_roast_level`.
+3. The model's response is parsed and exposed as `sensor.roastronaut_roast_level_model`.
 4. Lovelace displays the current level alongside BT/RoR. When the level matches the profile's target, a banner reads "**Drop now**" and the dump button highlights.
 5. You decide whether to trust it. The decision stays with you.
 
@@ -160,7 +160,11 @@ Plan to migrate to fully local once your homelab inference setup is stable.
 
 There isn't really a "done" for Phase 3. Once the AI layer is in, you'll keep refining prompts, models, profiles, and dashboard ergonomics for as long as you keep roasting. Reasonable signals you've reached a stable plateau:
 
-- **Vision grading agrees with your manual assessment** more often than not on a roast-by-roast basis. Aim for ~80% agreement on roast level within ±1 SCAA point.
+- **Vision grading beats guessing.** This one is a rolling metric rather than a gate, because it cannot be read for months: a [paired observation](../glossary.md#paired-observation) needs both an [observed roast level](../glossary.md#observed-roast-level) and a [model roast level](../glossary.md#model-roast-level), and nothing produces the second before this phase ships. So the counter starts at zero on day one no matter how many roasts you have logged.
+
+  Wait for at least 20 pairs before reading the number at all. Then ask whether `roast_level_model` agrees with `roast_level_observed` within ±1 SCAA point more often than a majority-class baseline does, where the baseline is "always answer whichever level you roast most often," scored the same ±1 way and recomputed as the log grows. Bare agreement of ~80% sounds strong and means nothing on its own: your realistic range is roughly 3 through 6, so ±1 covers most of the scale and a model that always answers 4 scores well without seeing anything. At n≈20 a gap under roughly 15 points is noise.
+
+  Known limitation: if you roast very consistently, the baseline climbs high enough that this metric stops discriminating at all. That is the metric running out of room rather than the model failing, and at that point the useful signal moves elsewhere, to whether the "drop now" banner actually changes what you do.
 - **Post-mortem critiques produce at least one actionable suggestion** in maybe half of them. The other half will be "looks fine," which is also useful.
 - **Recipe-suggested profiles produce drinkable coffee** on the first try when you accept them as-is.
 - **Latency is acceptable**. Vision call returns in under 5 seconds, post-mortem in under 30. Local inference should hit these comfortably; hosted is faster.
