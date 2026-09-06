@@ -17,6 +17,14 @@ The roast log is the only thing the project produces that you cannot reconstruct
 
 The phase docs assume this schema exists; this doc defines it.
 
+## What "established in a phase" means
+
+Pinning a field's shape and writing a stored record are separate milestones, and Phase 0 only reaches the first. Assembling a record means choosing a storage backend, which this doc defers to the end of Phase 1, so a Phase 0 that stored records would be forcing a decision the project deliberately postpones.
+
+A phase that establishes a field therefore owes two things: the field's shape is final from that phase onward, and every value the phase can produce is captured somewhere retrievable and tied to the roast it came from. Phase 1 assembles those captured values into a stored record once the backend is picked. This is why Phase 0's build steps produce data without producing a record, which reads like a gap and is not one.
+
+The roast association is the fragile half. A manual field living in one HA input helper gets overwritten by the next roast, which leaves recorder history as the only link between a value and the roast it describes, and the recorder purges. Phase 3 scores the vision model over at least 20 [paired observations](glossary.md#paired-observation), and the `roast_level_observed` half of those starts accumulating at the first smoke-test roast. A Phase 0 capture that loses the association spends a year of readings without anyone noticing until Phase 3 goes looking for them.
+
 ## Fields by Phase
 
 ### Phase 0 fields
@@ -142,3 +150,4 @@ Time-series arrays are truncated above; in practice each one has roughly one sam
 | Roast level separate from `cup_quality` | Yes | How dark it got and how it tasted are different axes. Only the first can validate a vision model, and burying it in `cup_quality.notes` makes it unqueryable. |
 | Agreement not stored per roast | Correct | Agreement is a property of a set of paired observations, not of one roast, and it is meaningless below about 20. A per-roast field would invite exactly the arithmetic Phase 3 should not be doing. |
 | Storage backend | Defer | Both InfluxDB and HA recorder are reasonable. The right answer depends on Phase 2 / Phase 3 usage patterns; pick before the end of Phase 1. |
+| Shape fixed in Phase 0, records assembled in Phase 1 | Yes | Assembling a record means picking a storage backend, and that choice is deferred one row above. Phase 0 fixes every field's shape and captures its values against a roast; Phase 1 stores them once the backend is chosen. Without this split, Phase 0 cannot satisfy the schema without pre-empting a deliberate deferral. |
