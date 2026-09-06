@@ -1,6 +1,6 @@
 # Observed roast level is graded on cooled beans, not in the chamber
 
-`roast_level_observed` is your reading of cooled beans at rest; `roast_level_model` is the vision model's reading of beans in the chamber, mid-roast. The reference deliberately does not match the conditions the thing being measured sees. A SCAA level is conventionally assessed on cooled beans, it is the reading you could defend to another roaster or reproduce from a photo weeks later, and it is the number you actually care about once the roast is over.
+`roast_level_observed` is your reading of cooled beans at rest; `roast_level_model` is the vision model's reading of beans in the chamber, mid-roast. The reference deliberately does not match the conditions the thing being measured sees. A roast level is conventionally read off cooled beans, it is the reading you could defend to another roaster or reproduce from a photo weeks later, and it is the number you actually care about once the roast is over.
 
 ## Considered options
 

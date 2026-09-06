@@ -21,6 +21,8 @@ The phase docs assume this schema exists; this doc defines it.
 
 Pinning a field's shape and writing a stored record are separate milestones, and Phase 0 only reaches the first. Assembling a record means choosing a storage backend, which this doc defers to the end of Phase 1, so a Phase 0 that stored records would be forcing a decision the project deliberately postpones.
 
+"Shape" means the field's type, not the meaning of the values inside it, and it binds from the first logged value rather than from the commit that writes the table. An `int` stays an `int` forever; what range that `int` spans, and what each number means, can still move while nothing has been logged. That is what let `roast_level_observed` go from 1-8 to 1-9 in [ADR-0003](adr/0003-roast-level-indexes-the-agtron-tiles-with-a-slot-for-green.md) without breaking anything, and it is what stops being true the moment you record a roast.
+
 A phase that establishes a field therefore owes two things: the field's shape is final from that phase onward, and every value the phase can produce is captured somewhere retrievable and tied to the roast it came from. Phase 1 assembles those captured values into a stored record once the backend is picked. This is why Phase 0's build steps produce data without producing a record, which reads like a gap and is not one.
 
 The roast association is the fragile half. A manual field living in one HA input helper gets overwritten by the next roast, which leaves recorder history as the only link between a value and the roast it describes, and the recorder purges. Phase 3 scores the vision model over at least 20 [paired observations](glossary.md#paired-observation), and the `roast_level_observed` half of those starts accumulating at the first smoke-test roast. A Phase 0 capture that loses the association spends a year of readings without anyone noticing until Phase 3 goes looking for them.
@@ -42,7 +44,7 @@ Established in [Phase 0](phases/phase-0-smoke-test-hand-cranked-validation.md). 
 | `llm_critique` | string (markdown) | HA rest_command | Free-form critique returned by the post-mortem call. |
 | `subjective_notes` | string (markdown) | manual entry | Your notes during or after roast. Smell, sound, anything not telemetry. |
 | `cup_quality` | object: `{ score: int 1-10, assessed_at: ISO 8601, notes: string }` or null | manual entry, days later | Filled in after you actually drink it. Carries `assessed_at` because rest time changes what you taste, so an undated score is missing its most important qualifier. |
-| `roast_level_observed` | object: `{ level: int 1-8, assessed_at: ISO 8601, notes: string }` or null | manual entry, after cooling | Your own [SCAA roast level](glossary.md#scaa-roast-levels), read from cooled beans at rest. This is the reference the Phase 3 vision model gets scored against, which is why it lives here rather than in Phase 3: the habit and the baseline both need a running start. |
+| `roast_level_observed` | object: `{ level: int 1-9, assessed_at: ISO 8601, notes: string }` or null | manual entry, after cooling | Your own [roast level](glossary.md#roast-level), read from cooled beans at rest. This is the reference the Phase 3 vision model gets scored against, which is why it lives here rather than in Phase 3: the habit and the baseline both need a running start. |
 
 Both manual fields stay null until you fill them, and both need a surface that lists what is outstanding plus some nudge to go do it. A field with nothing prompting it stays null forever, and Phase 3's validation needs at least 20 non-null `roast_level_observed` readings before it means anything. The mechanism is an implementation choice; the requirement is not.
 
@@ -72,7 +74,7 @@ Added in [Phase 3](phases/phase-3-run-ai-driven-roasting.md):
 
 | Field | Type | Source | Notes |
 | --- | --- | --- | --- |
-| `roast_level_model` | time series of (offset_seconds, level int 1-8, confidence float 0-1, notes string) | HA + vision model | One sample every ~10 seconds on the [SCAA scale](glossary.md#scaa-roast-levels). Scored against `roast_level_observed`; a roast carrying both is a paired observation. |
+| `roast_level_model` | time series of (offset_seconds, level int 1-9, confidence float 0-1, notes string) | HA + vision model | One sample every ~10 seconds on the [roast level scale](glossary.md#roast-level). Scored against `roast_level_observed`; a roast carrying both is a paired observation. |
 | `camera_frame_refs` | list of (offset_seconds, path or url) | HA camera entity | References, not blobs. Frames live wherever HA stores camera snapshots; this list lets you find them again. |
 
 ## Storage Backend

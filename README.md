@@ -47,7 +47,7 @@ I'm in Phase 0. The cross-cutting docs (safety, schema, tooling, BOM, glossary, 
 └── docs/
     ├── README.md                ← entry point for the docs tree
     ├── safety.md                ← layered defenses and per-roast checklist
-    ├── glossary.md              ← BT, ET, RoR, SCAA, the boom, etc.
+    ├── glossary.md              ← BT, ET, RoR, roast level, the boom, etc.
     ├── roast-log-schema.md      ← canonical schema for one logged roast
     ├── tooling-claude-code.md   ← where the AI coding agent earns its keep
     ├── bom.md                   ← consolidated bill of materials
