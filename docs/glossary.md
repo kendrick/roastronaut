@@ -60,7 +60,7 @@ The lowest BT after charging, when the cold beans stop pulling heat out of the c
 
 ### Drop temperature
 
-The BT at the moment the beans leave the chamber. The single number that most reliably correlates to perceived roast level.
+The BT at the moment the beans leave the chamber. The single number that most reliably correlates to perceived roast level, though correlating is not measuring: where the actual level matters the reference is [observed roast level](#observed-roast-level), for the reasons in [ADR-0001](adr/0001-drop-temperature-is-a-proxy-not-ground-truth.md).
 
 ### Smoke test
 
